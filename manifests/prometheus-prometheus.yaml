@@ -10,6 +10,7 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  retention: 120d
   alerting:
     alertmanagers:
     - apiVersion: v2
@@ -46,3 +47,12 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.45.0
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: gp3
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 240Gi
